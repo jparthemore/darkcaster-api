@@ -1,6 +1,6 @@
 const express = require ('express');
 const router = express.Router(); //meant to be used in constructior w/router
-const darksky = require ('../credentials').darksky; //be careful - want value of property - api key brancelet - get in - key
+const darksky = process.env.DARKSKY || require ('../credentials').darksky; //be careful - want value of property - api key brancelet - get in - key
 //const baseUrl = `https://api.darksky.net/forecast/${darksky}/37.8267,-122.4233`;//don't always want alcatraz
 const baseUrl = `https://api.darksky.net/forecast/${darksky}/`;
 const axios = require('axios'); //by default lllooks in node-Mo
