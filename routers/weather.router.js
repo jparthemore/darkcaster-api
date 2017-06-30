@@ -5,7 +5,7 @@ const darksky = process.env.DARKSKY || require ('../credentials').darksky; //be 
 const baseUrl = `https://api.darksky.net/forecast/${darksky}/`;
 const axios = require('axios'); //by default lllooks in node-Mo
 
-router.get('/weather',(request,response)=>{  //broswer listening for that type of requiest
+router.get('/weather',(request,response,next)=>{  //broswer listening for that type of requiest
   //response.send('Here be the weather');
   const url = `${baseUrl}29,-82`;
   axios.get(url)
@@ -13,10 +13,11 @@ router.get('/weather',(request,response)=>{  //broswer listening for that type o
           response.json(weather.data);
         })
         .catch(err=>{
-          console.error(err); //wil print to server log (print in heroku)
+          //console.error(err); //wil print to server log (print in heroku)
+          next(err);
         });
 });
-router.get('/weather/:lat,:lon',(request,response)=>{
+router.get('/weather/:lat,:lon',(request,response,next)=>{
   const lat = request.params.lat;
   const lon = request.params.lon;
   const url = `${baseUrl}${lat},${lon}`;
@@ -25,7 +26,8 @@ router.get('/weather/:lat,:lon',(request,response)=>{
           response.json(weather.data);
         })
         .catch(err=>{
-          console.error(err); //wil print to server log (print in heroku)
+          //console.error(err); //wil print to server log (print in heroku)
+          next(err);
         });
   //response.send('Here be the weather for that place');
 });
