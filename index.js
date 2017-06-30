@@ -2,8 +2,13 @@ const express = require('express');
 const server = express();
 const port = process.env.PORT || 8080;
 
+//middlleware imports
+const logger = require('./middleware/logger');
 //routers
 const weatherRouter = require('./routers/weather.router');
+
+//middleware used
+server.use(logger);
 server.use(weatherRouter);//similar to include
 
 //dummy route for testing
