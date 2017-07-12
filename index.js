@@ -12,8 +12,8 @@ const weatherRouter = require('./routers/weather.router');
 
 //middleware used
 server.use(logger);
-server.use(weatherRouter);//similar to include
 server.use(cors());
+server.use(weatherRouter);//similar to include
 
 //dummy route for testing
 server.get('/',(request, response)=>{
